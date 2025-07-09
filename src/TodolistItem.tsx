@@ -1,22 +1,43 @@
 import {FilterValues, Task} from "./App.tsx";
 import {Button} from "./Button.tsx";
+import {ChangeEvent, useState} from "react";
 
 type PropsType = {
     title: string
     tasks: Task[]
     date?: string
-    deleteTask: (taskId: number) => void
+    deleteTask: (taskId: string) => void
     changeFilter: (filter: FilterValues) => void
+    addTask: (title: string) => void
 }
 
-export const Todolistitem = ({title, deleteTask, tasks, changeFilter, date}: PropsType) => {
+export const Todolistitem = ({title, deleteTask, tasks, changeFilter, date, addTask}: PropsType) => {
+
+    const [newTitle, setNewTitle] = useState('')
+
+    const onChangeTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setNewTitle(e.currentTarget.value)
+    }
+
+    const addTaskHandler = () => {
+        if (newTitle.trim() !== "") {
+            addTask(newTitle)
+        }
+        setNewTitle('')
+    }
 
     return (
         <div>
             <h3>{title}</h3>
             <div>
-                <input/>
-                <button>+</button>
+                <input onChange={onChangeTaskHandler}
+                       onKeyDown={(e) => {
+                           if (e.key === "Enter" && newTitle.trim() !== "") {
+                               addTaskHandler()
+                           }
+                       }}
+                       value={newTitle}/>
+                <button onClick={addTaskHandler} >+</button>
             </div>
             <ul>
                 {tasks.length === 0 ? 'Тасок нет' : tasks.map(el => {
