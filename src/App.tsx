@@ -1,5 +1,6 @@
 import './App.css'
 import {Todolistitem} from "./TodolistItem.tsx";
+import {useState} from "react";
 
 export type Task = {
     id: number
@@ -7,26 +8,41 @@ export type Task = {
     isDone: boolean
 }
 
-// export type TaskList = {}
+export type FilterValues = 'all' | 'active' | 'completed'
 
 export const App = () => {
 
-    const tasks1 : Task[] = [
+    const [filter, setFilter] = useState<FilterValues>('all')
+    const [tasks, setTasks] = useState([
         { id: 1, title: 'HTML&CSS', isDone: true },
         { id: 2, title: 'JS', isDone: true },
         { id: 3, title: 'ReactJS', isDone: false },
-    ]
+    ])
 
-    const tasks2 : Task[] = [
-        // { id: 1, title: 'Hello world', isDone: true },
-        // { id: 2, title: 'I am Happy', isDone: false },
-        // { id: 3, title: 'Yo', isDone: false },
-    ]
+    const deleteTask = (taskId: number) => {
+        const newTasks = tasks.filter((item) => item.id !== taskId)
+        setTasks(newTasks)
+    }
+
+    const changeFilter = (filterValues: FilterValues) => {
+        setFilter(filterValues)
+    }
+
+    let filteredTasks = tasks
+    if (filter === 'active') {
+        filteredTasks = tasks.filter(task => task.isDone === false)
+    }
+    if (filter === 'completed') {
+        filteredTasks = tasks.filter(task => task.isDone === true)
+    }
 
   return (
       <div className="app">
-       <Todolistitem title={'What to learn'} tasks={tasks1} date={`${new Date().getDate()}.${new Date().getMonth() + 1}.${new Date().getFullYear()}`}/>
-       <Todolistitem title={'What to read'} tasks={tasks2}/>
+       <Todolistitem title={'What to learn'}
+                     tasks={filteredTasks}
+                     deleteTask={deleteTask}
+                     changeFilter={changeFilter}
+       />
       </div>
   )
 }
