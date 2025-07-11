@@ -1,26 +1,24 @@
-import {FilterValues, Task} from "./App.tsx";
+import {FilterValues, Task, Todolist} from "./App.tsx";
 import {Button} from "./Button.tsx";
 import {ChangeEvent, useState} from "react";
 
 type PropsType = {
-    title: string
+    todolist: Todolist
     tasks: Task[]
     date?: string
     deleteTask: (taskId: string) => void
-    changeFilter: (filter: FilterValues) => void
+    changeFilter: (tdId: string, filter: FilterValues) => void
     addTask: (title: string) => void
     changeTaskStatus: (taskId: string, isDone: boolean) => void
-    filter: FilterValues
 }
 
 export const Todolistitem = ({
-                                 title,
+                                 todolist: {id, filter, title},
                                  deleteTask,
                                  tasks,
                                  changeFilter,
                                  date,
                                  addTask,
-                                 filter,
                                  changeTaskStatus
 }: PropsType) => {
 
@@ -45,6 +43,10 @@ export const Todolistitem = ({
         if (event.key === "Enter" && taskTitle.trim() !== "") {
             addTaskHandler()
         }
+    }
+
+    const changeFilterHandler = (filter: FilterValues) => {
+        changeFilter(id, filter)
     }
 
     return (
@@ -80,11 +82,11 @@ export const Todolistitem = ({
             </ul>
             <div>
                 <Button className={filter === 'all' ? 'active-filter' : ''}
-                    onClick={() => changeFilter('all')} title={'All'}/>
+                    onClick={() => changeFilterHandler('all')} title={'All'}/>
                 <Button className={filter === 'active' ? 'active-filter' : ''}
-                    onClick={() => changeFilter('active')} title={'Active'}/>
+                    onClick={() => changeFilterHandler('active')} title={'Active'}/>
                 <Button className={filter === 'completed' ? 'active-filter' : ''}
-                    onClick={() => changeFilter('completed')} title={'Completed'}/>
+                    onClick={() => changeFilterHandler('completed')} title={'Completed'}/>
             </div>
             <div>{date}</div>
         </div>
