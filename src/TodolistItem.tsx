@@ -6,10 +6,10 @@ type PropsType = {
     todolist: Todolist
     tasks: Task[]
     date?: string
-    deleteTask: (taskId: string) => void
-    changeFilter: (tdId: string, filter: FilterValues) => void
-    addTask: (title: string) => void
-    changeTaskStatus: (taskId: string, isDone: boolean) => void
+    deleteTask: (todolistId: string, taskId: string) => void
+    changeFilter: (todolistId: string, filter: FilterValues) => void
+    addTask: (todolistId: string, title: string) => void
+    changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
 }
 
 export const Todolistitem = ({
@@ -32,7 +32,7 @@ export const Todolistitem = ({
 
     const addTaskHandler = () => {
         if (taskTitle.trim() !== "") {
-            addTask(taskTitle)
+            addTask(id, taskTitle)
         } else {
             setError('Title is required')
         }
@@ -64,10 +64,10 @@ export const Todolistitem = ({
                 {tasks.length === 0 ? 'Тасок нет' : tasks.map(el => {
 
                     const deleteTaskHandler = () => {
-                        deleteTask(el.id)
+                        deleteTask(id, el.id)
                     }
                     const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        changeTaskStatus(el.id, e.target.checked)
+                        changeTaskStatus(id, el.id, e.target.checked)
                     }
                     return (
                         <li key={el.id} className={el.isDone ? 'is-done': ''}>
