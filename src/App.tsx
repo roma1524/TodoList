@@ -14,9 +14,7 @@ export type Todolist = {
     filter: FilterValues
 }
 
-export type TasksState = {
-    [ket: string]: Task[]
-}
+export type TasksState = Record<string, Task[]>
 
 export type FilterValues = 'all' | 'active' | 'completed'
 
@@ -63,6 +61,12 @@ export const App = () => {
         }
     }
 
+    const deleteTodolist = (todolistId: string) => {
+        setTodolists([...todolists.filter(td => td.id !== todolistId)])
+        delete tasks[todolistId]
+        setTasks({...tasks})
+    }
+
 
 
   return (
@@ -85,6 +89,7 @@ export const App = () => {
                                 changeFilter={changeFilter}
                                 addTask={addTask}
                                 changeTaskStatus={changeTaskStatus}
+                                deleteTodolist={deleteTodolist}
                   />
               )
           })}

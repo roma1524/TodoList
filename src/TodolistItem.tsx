@@ -10,6 +10,7 @@ type PropsType = {
     changeFilter: (todolistId: string, filter: FilterValues) => void
     addTask: (todolistId: string, title: string) => void
     changeTaskStatus: (todolistId: string, taskId: string, isDone: boolean) => void
+    deleteTodolist: (todolistId: string) => void
 }
 
 export const Todolistitem = ({
@@ -19,7 +20,8 @@ export const Todolistitem = ({
                                  changeFilter,
                                  date,
                                  addTask,
-                                 changeTaskStatus
+                                 changeTaskStatus,
+                                 deleteTodolist
 }: PropsType) => {
 
     const [taskTitle, setTaskTitle] = useState('')
@@ -49,9 +51,16 @@ export const Todolistitem = ({
         changeFilter(id, filter)
     }
 
+    const deleteTodolistHandler = () => {
+        deleteTodolist(id)
+    }
+
     return (
         <div>
-            <h3>{title}</h3>
+            <div className={'container'}>
+                <h3>{title}</h3>
+                <Button title={'x'} onClick={deleteTodolistHandler}/>
+            </div>
             <div>
                 <input className={error ? 'error' : ''}
                        onChange={onChangeTaskHandler}
