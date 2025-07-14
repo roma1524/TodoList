@@ -1,6 +1,6 @@
 import {FilterValues, Task, Todolist} from "./App.tsx";
 import {Button} from "./Button.tsx";
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent} from "react";
 import {CreateItemForm} from "./CreateItemForm.tsx";
 
 type PropsType = {
