@@ -1,6 +1,7 @@
 import {FilterValues, Task, Todolist} from "./App.tsx";
 import {Button} from "./Button.tsx";
 import {ChangeEvent, useState} from "react";
+import {CreateItemForm} from "./CreateItemForm.tsx";
 
 type PropsType = {
     todolist: Todolist
@@ -24,29 +25,6 @@ export const Todolistitem = ({
                                  deleteTodolist
 }: PropsType) => {
 
-    const [taskTitle, setTaskTitle] = useState('')
-    const [error, setError] = useState<string | null>(null)
-
-    const onChangeTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setTaskTitle(e.currentTarget.value)
-        setError(null)
-    }
-
-    const addTaskHandler = () => {
-        if (taskTitle.trim() !== "") {
-            addTask(id, taskTitle)
-        } else {
-            setError('Title is required')
-        }
-        setTaskTitle('')
-    }
-
-    const createTaskOnEnterHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter" && taskTitle.trim() !== "") {
-            addTaskHandler()
-        }
-    }
-
     const changeFilterHandler = (filter: FilterValues) => {
         changeFilter(id, filter)
     }
@@ -55,20 +33,17 @@ export const Todolistitem = ({
         deleteTodolist(id)
     }
 
+    const addTaskHandler = (title: string) => {
+        addTask(id, title)
+    }
+
     return (
         <div>
             <div className={'container'}>
                 <h3>{title}</h3>
                 <Button title={'x'} onClick={deleteTodolistHandler}/>
             </div>
-            <div>
-                <input className={error ? 'error' : ''}
-                       onChange={onChangeTaskHandler}
-                       onKeyDown={createTaskOnEnterHandler}
-                       value={taskTitle}/>
-                <button onClick={addTaskHandler} >+</button>
-                {error && <div className={'error-message'}>{error}</div>}
-            </div>
+            <CreateItemForm createItem={addTaskHandler}/>
             <ul>
                 {tasks.length === 0 ? 'Тасок нет' : tasks.map(el => {
 
