@@ -88,9 +88,9 @@ export const App = () => {
                             <MenuIcon/>
                         </IconButton>
                     <div>
-                        <NavButton color="inherit">Sign in</NavButton>
-                        <NavButton color="inherit">Sign up</NavButton>
-                        <NavButton color="inherit">Faq</NavButton>
+                        <NavButton>Sign in</NavButton>
+                        <NavButton>Sign up</NavButton>
+                        <NavButton background={'dodgerblue'}>Faq</NavButton>
                     </div>
                     </Container>
                 </Toolbar>
