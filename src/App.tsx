@@ -5,9 +5,10 @@ import {v1} from "uuid";
 import {CreateItemForm} from "./CreateItemForm.tsx";
 import AppBar from '@mui/material/AppBar';
 import {Container, Grid, Paper, Toolbar} from "@mui/material";
-import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
+import {containerSx} from "./TodolistItem.styles.ts";
+import {NavButton} from "./NavButton.ts";
 
 export type Task = {
     id: string
@@ -80,16 +81,22 @@ export const App = () => {
 
     return (
         <div className="app">
-            <AppBar position="static">
+            <AppBar position="static" sx={{mb: '30px'}}>
                 <Toolbar>
-                    <IconButton color="inherit">
-                        <MenuIcon/>
-                    </IconButton>
-                    <Button color="inherit">Sign in</Button>
+                    <Container maxWidth={'lg'} sx={containerSx}>
+                        <IconButton color="inherit">
+                            <MenuIcon/>
+                        </IconButton>
+                    <div>
+                        <NavButton color="inherit">Sign in</NavButton>
+                        <NavButton color="inherit">Sign up</NavButton>
+                        <NavButton color="inherit">Faq</NavButton>
+                    </div>
+                    </Container>
                 </Toolbar>
             </AppBar>
             <Container maxWidth={'lg'}>
-                <Grid container>
+                <Grid container sx={{mb: '30px'}}>
                     <CreateItemForm createItem={addTodolist}/>
                 </Grid>
                 <Grid container spacing={4}>
@@ -105,7 +112,7 @@ export const App = () => {
 
                         return (
                             <Grid key={td.id}>
-                                <Paper>
+                                <Paper sx={{p: '0 20px 20px 20px'}}>
                                     <Todolistitem key={td.id}
                                                   todolist={td}
                                                   tasks={filteredTasks}
@@ -124,7 +131,7 @@ export const App = () => {
                 </Grid>
             </Container>
         </div>
-    )
+)
 }
 
 export default App

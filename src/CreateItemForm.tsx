@@ -1,5 +1,7 @@
 import {ChangeEvent, useState} from "react";
-import {Button, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
+import AddBoxIcon from '@mui/icons-material/AddBox'
+import IconButton from '@mui/material/IconButton'
 
 export type Props = {
     createItem: (title: string) => void
@@ -41,7 +43,9 @@ export const CreateItemForm = ({createItem}: Props) => {
                 onChange={onChangeTaskHandler}
                 onKeyDown={createTaskOnEnterHandler}
                 value={taskTitle}/>
-            <Button variant="contained" onClick={addTaskHandler}>+</Button>
+            <IconButton color={'primary'} onClick={addTaskHandler}>
+                <AddBoxIcon/>
+            </IconButton>
         </div>
     )
 }
