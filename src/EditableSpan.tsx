@@ -1,4 +1,5 @@
 import {ChangeEvent, useState} from "react";
+import {TextField} from "@mui/material";
 
 type Props = {
     value: string
@@ -29,8 +30,9 @@ export const EditableSpan = ({ value, changeItemTitle }: Props) => {
     return (
         <>
             {editing ?
-                (<input
-                    type="text"
+                (<TextField
+                    variant={'outlined'}
+                    size={'small'}
                     value={title}
                     autoFocus
                     onBlur={turnOffEditMode}

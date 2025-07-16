@@ -1,5 +1,5 @@
 import {ChangeEvent, useState} from "react";
-import {Button} from "./Button.tsx";
+import {Button, TextField} from "@mui/material";
 
 export type Props = {
     createItem: (title: string) => void
@@ -15,7 +15,7 @@ export const CreateItemForm = ({createItem}: Props) => {
         setError(null)
     }
 
-    const createTaskOnEnterHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    const createTaskOnEnterHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter" && taskTitle.trim() !== "") {
             addTaskHandler()
         }
@@ -32,12 +32,16 @@ export const CreateItemForm = ({createItem}: Props) => {
 
     return (
         <div>
-            <input className={error ? 'error' : ''}
-                   onChange={onChangeTaskHandler}
-                   onKeyDown={createTaskOnEnterHandler}
-                   value={taskTitle}/>
-            <Button onClick={addTaskHandler} title={'+'}/>
-            {error && <div className={'error-message'}>{error}</div>}
+            <TextField
+                label={'Enter a title'}
+                variant={'outlined'}
+                size={'small'}
+                error={!!error}
+                helperText={error}
+                onChange={onChangeTaskHandler}
+                onKeyDown={createTaskOnEnterHandler}
+                value={taskTitle}/>
+            <Button variant="contained" onClick={addTaskHandler}>+</Button>
         </div>
     )
 }
