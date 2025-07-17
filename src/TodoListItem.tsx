@@ -7,7 +7,8 @@ import Box from '@mui/material/Box'
 import DeleteIcon from '@mui/icons-material/Delete'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
-import {containerSx, getListItemSx} from './TodolistItem.styles'
+// @ts-ignore
+import {containerSx, getListItemSx} from './TodoListItem.styles.ts';
 
 type PropsType = {
     todolist: Todolist
@@ -22,7 +23,7 @@ type PropsType = {
     changeTodolistTitle: (todolistId: string, title: string) => void
 }
 
-export const Todolistitem = ({
+export const TodoListItem = ({
                                  todolist: {id, filter, title},
                                  deleteTask,
                                  tasks,
