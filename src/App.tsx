@@ -17,7 +17,7 @@ import {
     deleteTodolistAC,
     todolistsReducer
 } from "./model/todolists-reducer.ts";
-import {tasksReducer} from "./model/tasks-reducer.ts";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, deleteTaskAC, tasksReducer} from "./model/tasks-reducer.ts";
 
 export type Task = {
     id: string
@@ -71,23 +71,17 @@ export const App = () => {
     })
 
     const deleteTask = (todolistId: string, taskId: string) => {
-        // setTasks({...tasks, [todolistId]: tasks[todolistId].filter(t => t.id !== taskId)})
+        dispatchToTasks(deleteTaskAC(todolistId, taskId))
     }
     const addTask = (todolistId: string, title: string) => {
-        // const newTask = {id: v1(), title, isDone: false}
-        // setTasks({...tasks, [todolistId]: [...tasks[todolistId], newTask]})
+        dispatchToTasks(addTaskAC(todolistId, title))
     }
     const changeTaskStatus = (todolistId: string, taskId: string, isDone: boolean) => {
-        // const currentTasks = tasks[todolistId].find((item) => item.id === taskId)
-        // if (currentTasks) {
-        //     currentTasks.isDone = isDone
-        //     setTasks({...tasks})
-        // }
+        dispatchToTasks(changeTaskStatusAC(todolistId, taskId, isDone))
     }
     const changeTaskTitle = (todolistId: string, taskId: string, title: string) => {
-        // setTasks({...tasks, [todolistId]: tasks[todolistId].map(t => t.id === taskId ? {...t, title} : t)})
+        dispatchToTasks(changeTaskTitleAC(todolistId, taskId, title))
     }
-
 
     const deleteTodolist = (todolistId: string) => {
         dispatchToTodolists(deleteTodolistAC(todolistId))
