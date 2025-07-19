@@ -1,5 +1,5 @@
 import type {TasksState} from '../App'
-import {CreateTodolistAction} from "./todolists-reducer.ts";
+import {CreateTodolistAction, DeleteTodolistAction} from "./todolists-reducer.ts";
 import {v1} from "uuid";
 
 const initialState: TasksState = {}
@@ -43,4 +43,4 @@ type deleteTaskAction = ReturnType<typeof deleteTaskAC>
 type changeTaskStatusAction = ReturnType<typeof changeTaskStatusAC>
 type changeTaskTitleAction = ReturnType<typeof changeTaskTitleAC>
 
-type Actions = CreateTodolistAction | addTaskAction | deleteTaskAction | changeTaskStatusAction | changeTaskTitleAction
+type Actions = CreateTodolistAction | DeleteTodolistAction | addTaskAction | deleteTaskAction | changeTaskStatusAction | changeTaskTitleAction
