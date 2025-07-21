@@ -9,7 +9,12 @@ import MenuIcon from '@mui/icons-material/Menu'
 import {containerSx} from "./TodoListItem.styles.ts";
 import {NavButton} from "./NavButton.ts";
 import {createTheme, ThemeProvider} from '@mui/material/styles'
-import {createTodolistAC, deleteTodolistAC} from "./features/model/todolists-reducer.ts";
+import {
+    changeFilterAC,
+    changeTodolistTitleAC,
+    createTodolistAC,
+    deleteTodolistAC
+} from "./features/model/todolists-reducer.ts";
 import {useAppDispatch} from "./common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "./common/hooks/useAppSelector.ts";
 import {selectTodolists} from "./features/model/todolists-selectors.ts";
@@ -71,10 +76,10 @@ export const App = () => {
         dispatch(createTodolistAC(title))
     }
     const changeTodolistTitle = (todolistId: string, title: string) => {
-        // dispatch(changeTodolistTitleAC(todolistId, title))
+        dispatch(changeTodolistTitleAC({id: todolistId, title}))
     }
     const changeFilter = (todolistId: string, filter: FilterValues) => {
-        // dispatch(changeFilterAC(todolistId, filter))
+        dispatch(changeFilterAC({id: todolistId, filter}))
     }
 
     return (
