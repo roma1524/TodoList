@@ -19,6 +19,7 @@ import {useAppDispatch} from "./common/hooks/useAppDispatch.ts";
 import {useAppSelector} from "./common/hooks/useAppSelector.ts";
 import {selectTodolists} from "./features/model/todolists-selectors.ts";
 import {selectTasks} from "./features/model/tasks-selectors.ts";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, deleteTaskAC} from "./features/model/tasks-reducer.ts";
 
 export type Task = {
     id: string
@@ -57,16 +58,16 @@ export const App = () => {
     const tasks = useAppSelector(selectTasks)
 
     const deleteTask = (todolistId: string, taskId: string) => {
-        // dispatch(deleteTaskAC(todolistId, taskId))
+        dispatch(deleteTaskAC({todolistId, taskId}))
     }
     const addTask = (todolistId: string, title: string) => {
-        // dispatch(addTaskAC(todolistId, title))
+        dispatch(addTaskAC({todolistId, title}))
     }
     const changeTaskStatus = (todolistId: string, taskId: string, isDone: boolean) => {
-        // dispatch(changeTaskStatusAC(todolistId, taskId, isDone))
+        dispatch(changeTaskStatusAC({todolistId, taskId, isDone}))
     }
     const changeTaskTitle = (todolistId: string, taskId: string, title: string) => {
-        // dispatch(changeTaskTitleAC(todolistId, taskId, title))
+        dispatch(changeTaskTitleAC({todolistId, taskId, title}))
     }
 
     const deleteTodolist = (todolistId: string) => {
