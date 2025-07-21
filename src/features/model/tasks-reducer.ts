@@ -1,10 +1,18 @@
-import type {TasksState} from '../App'
-import {CreateTodolistAction, DeleteTodolistAction} from "./todolists-reducer.ts";
-import {v1} from "uuid";
+import type {TasksState} from '../../App.tsx'
+import {createReducer} from "@reduxjs/toolkit";
+import {createTodolistAC} from "./todolists-reducer.ts";
 
 const initialState: TasksState = {}
 
-export const tasksReducer = (state: TasksState = initialState, action: Actions): TasksState => {
+// export const deleteTaskAC = createAction<{todolistId: string, taskId: string}>('tasks/deleteTask')
+
+export const tasksReducer = createReducer(initialState, (builder) => {
+    builder.addCase(createTodolistAC, (state, action) => {
+        state[action.payload.id] = []
+    })
+})
+
+/*export const tasksReducer = (state: TasksState = initialState, action: Actions): TasksState => {
     switch (action.type) {
         case 'ADD_TASK' : {
             return {...state, [action.payload.todolistId]: [{id: v1(), title: action.payload.title, isDone: false}, ...state[action.payload.todolistId]]}
@@ -44,3 +52,5 @@ type changeTaskStatusAction = ReturnType<typeof changeTaskStatusAC>
 type changeTaskTitleAction = ReturnType<typeof changeTaskTitleAC>
 
 type Actions = CreateTodolistAction | DeleteTodolistAction | addTaskAction | deleteTaskAction | changeTaskStatusAction | changeTaskTitleAction
+*/
+
