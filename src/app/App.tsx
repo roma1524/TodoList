@@ -1,6 +1,5 @@
 import './App.css'
 import {TodoListItem} from "../features/todolists/TodolistItem/TodoListItem.tsx";
-import {useState} from "react";
 import {CreateItemForm} from "../common/components/CreateItemForm/CreateItemForm.tsx";
 import AppBar from '@mui/material/AppBar';
 import {Container, CssBaseline, Grid, Paper, Switch, Toolbar} from "@mui/material";
@@ -8,7 +7,7 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import {containerSx} from "../features/todolists/TodolistItem/TodoListItem.styles.ts";
 import {NavButton} from "../common/components/NavButton/NavButton.ts";
-import {createTheme, ThemeProvider} from '@mui/material/styles'
+import {ThemeProvider} from '@mui/material/styles'
 import {
     changeFilterAC,
     changeTodolistTitleAC,
@@ -20,6 +19,9 @@ import {useAppSelector} from "../common/hooks/useAppSelector.ts";
 import {selectTodolists} from "../features/model/todolists-selectors.ts";
 import {selectTasks} from "../features/model/tasks-selectors.ts";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, deleteTaskAC} from "../features/model/tasks-reducer.ts";
+import {selectThemeMode} from "./app-selectors.ts";
+import {changeThemeModeAC} from "./app-reducer.ts";
+import {getTheme} from "../common/theme/theme.ts";
 
 export type Task = {
     id: string
@@ -34,23 +36,14 @@ export type Todolist = {
 export type TasksState = Record<string, Task[]>
 export type FilterValues = 'all' | 'active' | 'completed'
 
-type ThemeMode = 'dark' | 'light'
-
 export const App = () => {
 
-    const [themeMode, setThemeMode] = useState<ThemeMode>('light')
+    const themeMode = useAppSelector(selectThemeMode)
 
-    const theme = createTheme({
-        palette: {
-            mode: themeMode,
-            primary: {
-                main: '#087EA4',
-            },
-        },
-    })
+    const theme = getTheme(themeMode)
 
     const changeMode = () => {
-        setThemeMode(themeMode === 'light' ? 'dark' : 'light')
+        dispatch(changeThemeModeAC({newThemeMode: themeMode === 'light' ? 'dark' : 'light'}))
     }
 
     const dispatch = useAppDispatch()
