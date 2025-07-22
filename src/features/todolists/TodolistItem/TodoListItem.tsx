@@ -1,7 +1,7 @@
-import {FilterValues, Task, Todolist} from "./App.tsx";
+import {FilterValues, Task, Todolist} from "../../../app/App.tsx";
 import {ChangeEvent} from "react";
-import {CreateItemForm} from "./CreateItemForm.tsx";
-import {EditableSpan} from "./EditableSpan.tsx";
+import {CreateItemForm} from "../../../common/components/CreateItemForm/CreateItemForm.tsx";
+import {EditableSpan} from "../../../common/components/EditableSpan/EditableSpan.tsx";
 import {IconButton, Button, Checkbox} from "@mui/material";
 import Box from '@mui/material/Box'
 import DeleteIcon from '@mui/icons-material/Delete'

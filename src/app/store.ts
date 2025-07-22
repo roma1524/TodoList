@@ -1,6 +1,6 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit'
-import {tasksReducer} from "./features/model/tasks-reducer.ts";
-import {todolistsReducer} from "./features/model/todolists-reducer.ts";
+import {tasksReducer} from "../features/model/tasks-reducer.ts";
+import {todolistsReducer} from "../features/model/todolists-reducer.ts";
 
 
 const rootReducer = combineReducers({
