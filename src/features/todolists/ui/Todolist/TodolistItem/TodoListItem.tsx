@@ -1,5 +1,5 @@
 import {Todolist} from "@/app/App.tsx";
-import {CreateItemForm} from "@/common/components/CreateItemForm/CreateItemForm.tsx";
+import {CreateItemForm} from "@/app/CreateItemForm/CreateItemForm.tsx";
 // @ts-ignore
 import {containerSx, getListItemSx} from './TodoListItem.styles.ts';
 import {useAppDispatch} from "@/common/hooks/useAppDispatch.ts";
