@@ -1,6 +1,6 @@
 import List from "@mui/material/List";
 import {useAppSelector} from "@/common/hooks/useAppSelector.ts";
-import {selectTasks} from "@/features/todolists/model/tasks-selectors.ts";
+import {selectTasks} from "@/features/model/tasks-selectors.ts";
 import {Todolist} from "@/app/App.tsx";
 import { TaskItem } from "./TaskItem/TaskItem.tsx";
 
